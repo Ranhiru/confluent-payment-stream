@@ -1,5 +1,6 @@
 package com.ranhiru.twitterstream.configuration
 
+import com.ranhiru.twitterstream.Payment
 import org.apache.kafka.streams.StreamsBuilder
 import org.apache.kafka.streams.kstream.KStream
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties
@@ -20,8 +21,8 @@ open class KafkaConfiguration {
     }
 
     @Bean
-    open fun streamHandler(streamsBuilder: StreamsBuilder): KStream<Int, String> {
-        val stream = streamsBuilder.stream<Int, String>("tweets")
+    open fun streamHandler(streamsBuilder: StreamsBuilder, topicConfiguration: TopicConfiguration): KStream<String, Payment> {
+        val stream = streamsBuilder.stream<String, Payment>(topicConfiguration.name)
         stream.peek { key, value ->
             println("Streaming key $key with value $value")
         }

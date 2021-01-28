@@ -1,2 +1,14 @@
-rootProject.name = 'confluent-twitter-stream'
-
+pluginManagement {
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+        jcenter()
+        maven {
+            url  = "https://dl.bintray.com/gradle/gradle-plugins"
+        }
+        maven {
+            url = "https://packages.confluent.io/maven/"
+        }
+    }
+}
+rootProject.name = "confluent-twitter-stream"

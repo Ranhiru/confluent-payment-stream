@@ -10,3 +10,9 @@ spring:
         default.value.serde: "io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde"
         sasl.jaas.config: "sasl-jaas-config"
         sasl.mechanism: "PLAIN"
+        schema.registry.url: "https://psrc-epkz2.ap-southeast-2.aws.confluent.cloud"
+        basic.auth.user.info: "BASIC-AUTH-USER-INFO"
+        basic.auth.credentials.source: "USER_INFO"
+
+topic:
+  name: "payments"
