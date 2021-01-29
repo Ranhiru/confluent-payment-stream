@@ -1,0 +1,11 @@
+@namespace("com.ranhiru.twitterstream")
+
+protocol Payments {
+  import idl "Currency.avdl";
+
+  record Payment {
+    string id = "";
+    union { null, Currency } amount = null;
+    union { null, Currency } fees = null;
+  }
+}

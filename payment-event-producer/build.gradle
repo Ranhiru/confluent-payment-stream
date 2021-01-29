@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.kotlin.jvm'
+    id "org.springframework.boot" version "2.4.2"
+    id "io.spring.dependency-management" version "1.0.11.RELEASE"
+}
+
+group 'com.ranhiru'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven {
+        url "https://packages.confluent.io/maven/"
+    }
+}
+
+dependencies {
+    implementation(
+        project(":schemas"),
+        "org.jetbrains.kotlin:kotlin-stdlib",
+        "org.springframework.boot:spring-boot-starter",
+        "org.springframework.kafka:spring-kafka:$springKafkaVersion",
+        "org.apache.kafka:kafka-clients:$kafkaVersion",
+        "io.confluent:kafka-avro-serializer:$kafkaAvroVersion",
+    )
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}

@@ -23,8 +23,8 @@ open class KafkaConfiguration {
     @Bean
     open fun streamHandler(streamsBuilder: StreamsBuilder, topicConfiguration: TopicConfiguration): KStream<String, Payment> {
         val stream = streamsBuilder.stream<String, Payment>(topicConfiguration.name)
-        stream.peek { key, value ->
-            println("Streaming key $key with value $value")
+        stream.peek { key, payment ->
+            println("Streaming key $key with value $payment")
         }
         return stream
     }

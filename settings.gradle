@@ -4,7 +4,7 @@ pluginManagement {
         gradlePluginPortal()
         jcenter()
         maven {
-            url  = "https://dl.bintray.com/gradle/gradle-plugins"
+            url = "https://dl.bintray.com/gradle/gradle-plugins"
         }
         maven {
             url = "https://packages.confluent.io/maven/"
@@ -12,3 +12,6 @@ pluginManagement {
     }
 }
 rootProject.name = "confluent-twitter-stream"
+include 'payment-event-producer'
+include 'payment-event-consumer'
+include 'schemas'

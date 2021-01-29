@@ -1,14 +1,7 @@
 plugins {
     id 'java'
     id "org.jetbrains.kotlin.jvm" version "1.4.21"
-    id "org.springframework.boot" version "2.4.2"
-    id "io.spring.dependency-management" version "1.0.11.RELEASE"
-    id "com.commercehub.gradle.plugin.avro" version "0.22.0"
 }
-
-group "com.ranhiru"
-version "1.0-SNAPSHOT"
-sourceCompatibility = "11"
 
 repositories {
     mavenCentral()
@@ -17,22 +10,6 @@ repositories {
     }
 }
 
-dependencies {
-    implementation(
-        "org.jetbrains.kotlin:kotlin-stdlib",
-        "org.springframework.boot:spring-boot-starter",
-        "org.springframework.kafka:spring-kafka:$springKafkaVersion",
-        "org.apache.kafka:kafka-streams:$kafkaVersion",
-        "io.confluent:kafka-avro-serializer:$kafkaAvroVersion",
-        "io.confluent:kafka-streams-avro-serde:$kafkaAvroVersion",
-        "org.apache.avro:avro:$apacheAvroVersion"
-    )
+group "com.ranhiru"
+version "1.0-SNAPSHOT"
 
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine"
-}
-
-test {
-    useJUnitPlatform()
-}

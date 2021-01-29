@@ -1,0 +1,8 @@
+@namespace("com.ranhiru.twitterstream")
+
+protocol Common {
+  record Currency {
+    union { null, double } amount = null;
+    union { null, string } currency = null;
+  }
+}
