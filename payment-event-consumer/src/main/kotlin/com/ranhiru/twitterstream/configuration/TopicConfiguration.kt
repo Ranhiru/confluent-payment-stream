@@ -5,8 +5,11 @@ import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.context.annotation.Configuration
 
 @Configuration
-@ConfigurationProperties(prefix = "topic")
+@ConfigurationProperties(prefix = "topics")
 open class TopicConfiguration {
-    @JsonProperty("name")
-    lateinit var name: String
+    @JsonProperty("sourceTopicName")
+    lateinit var sourceTopicName: String
+
+    @JsonProperty("destinationTopicName")
+    lateinit var destinationTopicName: String
 }
