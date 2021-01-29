@@ -22,11 +22,10 @@ class ConfluentProducer {
         val producerRecord = ProducerRecord(TOPIC_NAME, payment.getId(), payment)
         logger.info("Producing record $payment")
         producer.send(producerRecord)
-        producer.flush()
-        producer.close()
     }
 
     fun shutdown() {
+        producer.flush()
         producer.close()
     }
 

@@ -17,11 +17,18 @@ open class ProducerApplication {
         }
 
         @Bean
-        fun demo(): CommandLineRunner {
+        fun commandLineRunner(): CommandLineRunner {
             return CommandLineRunner {
-                val payment = generatePaymentEvent()
+                println("How many events do you want to generate ?")
+                val numOfPaymentEventsToGenerate = readLine()?.toInt() ?: error("Input a valid number")
                 val confluentProducer = ConfluentProducer()
-                confluentProducer.produceRecord(payment)
+
+                (0..numOfPaymentEventsToGenerate).forEach { _ ->
+                    val payment = generatePaymentEvent()
+                    confluentProducer.produceRecord(payment)
+                }
+
+                confluentProducer.shutdown()
             }
         }
 
