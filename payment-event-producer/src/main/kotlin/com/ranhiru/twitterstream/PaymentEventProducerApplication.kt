@@ -9,13 +9,13 @@ import java.math.RoundingMode
 import kotlin.random.Random.Default.nextFloat
 
 @SpringBootApplication
-open class ProducerApplication {
+open class PaymentEventProducerApplication {
     companion object {
         private const val DEFAULT_NO_OF_EVENTS_TO_GENERATE = 5
 
         @JvmStatic
         fun main(args: Array<String>) {
-            SpringApplication.run(ProducerApplication::class.java, *args)
+            SpringApplication.run(PaymentEventProducerApplication::class.java, *args)
         }
 
         @Bean
