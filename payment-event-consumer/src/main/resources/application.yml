@@ -1,6 +1,6 @@
 spring:
   kafka:
-    bootstrap-servers: "localhost:9092"
+    bootstrap-servers: "${BOOTSTRAP_SERVERS:-localhost:9092}"
     streams:
       application-id: "confluent-twitter-stream"
       replication-factor: "3"
@@ -8,10 +8,10 @@ spring:
         security.protocol: "SASL_SSL"
         default.key.serde: "org.apache.kafka.common.serialization.Serdes$StringSerde"
         default.value.serde: "io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde"
-        sasl.jaas.config: "sasl-jaas-config"
+        sasl.jaas.config: "${SASL_JAAS_CONFIG:-SASL-JAAS-CONFIG}"
         sasl.mechanism: "PLAIN"
-        schema.registry.url: "https://psrc-epkz2.ap-southeast-2.aws.confluent.cloud"
-        basic.auth.user.info: "BASIC-AUTH-USER-INFO"
+        schema.registry.url: "${SCHEMA_REGISTRY_URL:-}"
+        basic.auth.user.info: "${BASIC_AUTH_USER_INFO:-BASIC-AUTH-USER-INFO}"
         basic.auth.credentials.source: "USER_INFO"
 
 topics:

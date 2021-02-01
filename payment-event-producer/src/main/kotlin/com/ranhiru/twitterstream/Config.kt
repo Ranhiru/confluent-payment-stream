@@ -2,7 +2,7 @@ package com.ranhiru.twitterstream
 
 import io.confluent.kafka.schemaregistry.client.SchemaRegistryClientConfig.BASIC_AUTH_CREDENTIALS_SOURCE
 import io.confluent.kafka.schemaregistry.client.SchemaRegistryClientConfig.USER_INFO_CONFIG
-import io.confluent.kafka.serializers.AbstractKafkaAvroSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG
+import io.confluent.kafka.serializers.AbstractKafkaSchemaSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG
 import org.apache.kafka.clients.CommonClientConfigs.BOOTSTRAP_SERVERS_CONFIG
 import org.apache.kafka.clients.CommonClientConfigs.SECURITY_PROTOCOL_CONFIG
 import org.apache.kafka.clients.producer.ProducerConfig
@@ -11,19 +11,18 @@ import org.apache.kafka.common.config.SaslConfigs.SASL_MECHANISM
 
 object Config {
     fun getAuthConfig(): Map<String, String> {
-        val username = System.getenv("SASL_LOGIN_USERNAME")
-        val password = System.getenv("SASL_LOGIN_PASSWORD")
+        val saslJaasConfig = System.getenv("SASL_JAAS_CONFIG")
 
         return mapOf(
             SECURITY_PROTOCOL_CONFIG to "SASL_SSL",
-            SASL_JAAS_CONFIG to "org.apache.kafka.common.security.plain.PlainLoginModule required username='$username' password='$password';",
+            SASL_JAAS_CONFIG to saslJaasConfig,
             SASL_MECHANISM to "PLAIN"
         )
     }
 
     fun getSchemaRegistryConfig(): Map<String, String> {
         val schemaRegistryUrl = System.getenv("SCHEMA_REGISTRY_URL")
-        val basicAuthUserInfo = System.getenv("SCHEMA_REGISTRY_USER_INFO")
+        val basicAuthUserInfo = System.getenv("BASIC_AUTH_USER_INFO")
 
         return mapOf(
             SCHEMA_REGISTRY_URL_CONFIG to schemaRegistryUrl,

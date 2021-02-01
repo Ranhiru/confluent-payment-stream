@@ -11,6 +11,8 @@ import kotlin.random.Random.Default.nextFloat
 @SpringBootApplication
 open class ProducerApplication {
     companion object {
+        private const val DEFAULT_NO_OF_EVENTS_TO_GENERATE = 5
+
         @JvmStatic
         fun main(args: Array<String>) {
             SpringApplication.run(ProducerApplication::class.java, *args)
@@ -18,12 +20,12 @@ open class ProducerApplication {
 
         @Bean
         fun commandLineRunner(): CommandLineRunner {
-            return CommandLineRunner {
-                println("How many events do you want to generate ?")
-                val numOfPaymentEventsToGenerate = readLine()?.toInt() ?: error("Input a valid number")
+            return CommandLineRunner { args ->
+                val numOfPaymentEventsToGenerate = args.getOrNull(0)?.toIntOrNull() ?: DEFAULT_NO_OF_EVENTS_TO_GENERATE
+                println("Producing $numOfPaymentEventsToGenerate event(s)")
                 val confluentProducer = ConfluentProducer()
 
-                (0..numOfPaymentEventsToGenerate).forEach { _ ->
+                (1..numOfPaymentEventsToGenerate).forEach { _ ->
                     val payment = generatePaymentEvent()
                     confluentProducer.produceRecord(payment)
                 }
